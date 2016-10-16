@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 修改 默认页面标签样式 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 国际化信息文件 -->
+	<constant name="struts.custom.i18n.resources" value="messages"/>
+
+	<package name="boscore" extends="json-default">
+		<!-- 拦截器 -->
+		<interceptors>
+			<interceptor name="login" class="loginInterceptor" />
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="login" >
+					<param name="excludeMethods">login</param>
+				</interceptor-ref>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="loginStack" />
+		
+		<global-results>
+			<result name="login">/login.jsp</result>
+			<!-- 全局json返回结果集， 返回值栈中result -->
+			<result name="json" type="json">
+				<param name="root">result</param>
+			</result>
+		</global-results>
+	
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
+		<!-- 需要进行权限控制的页面访问 -->
+		<action name="page_*_*">
+			<result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
+		</action>
+	</package>
+	
+	<include file="struts-user.xml" />
+	<include file="struts-bc.xml" />
+	<include file="struts-qp.xml" />
+</struts>

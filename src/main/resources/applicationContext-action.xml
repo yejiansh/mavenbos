@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- UserAction -->
+	<bean id="userAction" class="cn.itcast.bos.web.action.user.UserAction" scope="prototype" />
+	
+	<!-- LoginInterceptor -->
+	<bean id="loginInterceptor" class="cn.itcast.bos.web.interceptor.LoginInterceptor" scope="prototype"/>
+	
+	<!-- 取派员管理 -->
+	<bean id="staffAction" class="cn.itcast.bos.web.action.bc.StaffAction" scope="prototype" />
+	
+	<!-- 区域管理 -->
+	<bean id="regionAction" class="cn.itcast.bos.web.action.bc.RegionAction" scope="prototype" />
+	
+	<!-- 分区管理 -->
+	<bean id="subareaAction" class="cn.itcast.bos.web.action.bc.SubareaAction" scope="prototype" />
+	
+	<!-- 定区管理 -->
+	<bean id="decidedZoneAction" class="cn.itcast.bos.web.action.bc.DecidedZoneAction" scope="prototype" />
+	
+	<!-- 通知单操作 -->
+	<bean id="noticeBillAction" class="cn.itcast.bos.web.action.qp.NoticeBillAction" scope="prototype" />
+	
+	<!-- 工作单操作 -->
+	<bean id="workOrderManageAction" class="cn.itcast.bos.web.action.qp.WorkOrderManageAction" scope="prototype" />
+
+</beans>

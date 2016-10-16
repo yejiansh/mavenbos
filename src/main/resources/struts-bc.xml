@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="bc" extends="boscore">
+		<!-- 取派员管理 -->
+		<action name="staff_*" class="staffAction" method="{1}">
+			<result name="saveSUCCESS">/WEB-INF/pages/base/staff.jsp</result>
+			<result name="pageQuerySUCCESS" type="json">
+				<param name="includeProperties">total,rows.*</param>
+			</result>
+			<result name="delBatchSUCCESS">/WEB-INF/pages/base/staff.jsp</result>
+			<result name="ajaxlistSUCCESS" type="json">
+				<param name="includeProperties">
+					<!-- 先看root 是什么对象 List<Staff> -->
+					\[\d+\]\.id, \[\d+\]\.name
+				</param>
+			</result>
+		</action>
+		
+		<!-- 区域管理 -->
+		<action name="region_*" class="regionAction" method="{1}">
+			<result name="pageQuerySUCCESS" type="json">
+				<param name="includeProperties">total,rows.*</param>
+				<param name="excludeProperties">rows\[\d+\]\.subareas</param>
+			</result>
+			<result name="ajaxlistSUCCESS" type="json">
+				<param name="includeProperties">\[\d+\]\.id, \[\d+\]\.name</param>
+			</result>
+			<!-- 限制上传只能上传 .xls文件 -->
+			<interceptor-ref name="defaultStack">
+				<param name="fileUpload.allowedExtensions">.xls</param>
+			</interceptor-ref>
+		</action>
+		
+		<!-- 分区管理 -->
+		<action name="subarea_*" class="subareaAction" method="{1}">
+			<result name="saveSUCCESS">/WEB-INF/pages/base/subarea.jsp</result>
+			<result name="pageQuerySUCCESS" type="json">
+				<param name="includeProperties">total,rows.*</param>
+				<param name="excludeProperties">rows\[\d+\]\.region\.subareas</param>
+			</result>
+			<result name="findnoassociationsSUCCESS" type="json">
+				<param name="includeProperties">
+					\[\d+\]\.subareaid, \[\d+\]\.addresskey, \[\d+\]\.position
+				</param>
+			</result>
+		</action>
+		
+		<!-- 定区管理 -->
+		<action name="decidedzone_*" class="decidedZoneAction" method="{1}">
+			<result name="saveSUCCESS">/WEB-INF/pages/base/decidedzone.jsp</result>
+			<result name="pageQuerySUCCESS" type="json">
+				<param name="includeProperties">total,rows.*</param>
+				<param name="excludeProperties">rows\[\d+\]\.subareas</param>
+			</result>
+			<result name="findnoassociationsSUCCESS" type="json"></result>
+			<result name="findhasassociationsSUCCESS" type="json"></result>
+			<result name="assigncustomerstodecidedzoneSUCCESS">/WEB-INF/pages/base/decidedzone.jsp</result>
+		</action>
+	</package>
+</struts>

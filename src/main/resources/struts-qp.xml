@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="qp" extends="boscore">
+		<!-- 通知单操作 -->
+		<action name="noticebill_*" class="noticeBillAction" method="{1}">
+			<result name="findCustomerByPhoneSUCCESS" type="json"></result>
+			<result name="saveSUCCESS" type="redirectAction">
+				<param name="actionName">page_qupai_noticebill_add.action</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		
+		<!-- 工作单操作 -->
+		<action name="workordermanage_*" class="workOrderManageAction" method="{1}">
+			<result name="saveSUCCESS" type="json"></result>
+		</action>
+	</package>
+</struts>
