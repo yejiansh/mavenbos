@@ -7,6 +7,9 @@ import org.hibernate.criterion.DetachedCriteria;
 
 /**
  * 通用DAO 接口
+ 
+ 2016-10-16yejian
+ 
  * 
  * @author seawind
  * 
